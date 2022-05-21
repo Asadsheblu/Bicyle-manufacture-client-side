@@ -1,0 +1,32 @@
+[
+    {
+        "name":"CHAIN WHEEL",
+        "description":"TRIPLE CHAIN WHEEL 5-A 'NOUVO'",
+        "img":"https://i.ibb.co/jVtMn5T/14671863101.jpg",
+        "price":99.99,
+        "Quantity":1000,
+        "Mquantity":300
+
+
+    },
+    {
+        "name":"FREEWHEEL SINGLE SPEED",
+        "description":"FREEWHEEL SINGLE SPEED",
+        "img":"https://i.ibb.co/yqs4PbF/145717701901.jpg",
+        "price":89.99,
+        "Quantity":1500,
+        "Mquantity":300
+
+
+    },
+    {
+        "name":"PEDAL BOW TYPE OLANDA",
+        "description":"PEDAL BOW TYPE OLANDA",
+        "img":"https://i.ibb.co/xmQDzww/145819139951.jpg",
+        "price":90.69,
+        "Quantity":1600,
+        "Mquantity":300
+
+
+    }
+]
