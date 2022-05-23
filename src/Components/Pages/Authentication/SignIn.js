@@ -10,11 +10,9 @@ import {
     Outlet,
     Link,
   } from "react-router-dom";
-  import google from "../../../assets/img/google-g-2015-logo-svgrepo-com.svg"
-
+  import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import auth from "../../../firebase.init"
-import Loading from '../../SharedPages/Loading';
-
+import useToken from '../../../Hook/useToken';
 const SignIn = () => {
     const [email,setEmail]=useState("")
     const [
@@ -33,21 +31,21 @@ const SignIn = () => {
   if(error){
    toast(error.message)
   }
- 
+  const handelEmail=(e)=>{
+    setEmail(e.target.value)
+  }
   let navigate = useNavigate();
   let location = useLocation();
- 
-  if(loading){
-    return <Loading />
- }
+  const [token]=useToken(user || guser)
+
   let from = location.state?.from?.pathname || "/";
-  if(user){
+  if(token){
     navigate(from, { replace: true });
   }
     const handelSignIn=async(e)=>{
         e.preventDefault()
       
-        const email=e.target.email.value 
+       
         const pass=e.target.password.value 
        
         
@@ -58,41 +56,35 @@ const SignIn = () => {
    
     return (
         <div>
-            <div className='flex h-screen justify-center items-center'>
-           
-        <form onSubmit={handelSignIn}>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div class="card-body">
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Email</span>
+           <div className='flex h-screen justify-center items-center'>
+            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card-body">
+                    <h2 className="text-center text-2xl font-bold">Sign In</h2>
+            <form onSubmit={handelSignIn}>
+                
+          
+          <label className="label">
+            <span className="label-text">Email</span>
           </label>
-          <input type="text" name="email" placeholder="Email here" class="input input-bordered w-full max-w-xs" />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
+          <input type="text" onBlur={handelEmail} placeholder="Email here" class="input input-bordered w-full max-w-xs" />
+          <label className="label">
+            <span className="label-text">Password</span>
           </label>
           <input type="password" name='password' placeholder="Password here" class="input input-bordered w-full max-w-xs" />
-          <label class="label">
-            <p href="#" class="label-text-alt link link-hover">Forgot password?<input  onClick={async (e) => {
+          <p><small>Are You New Bicycle Mania? <Link className='text-primary' to="/signUp">Please login</Link></small></p>
+         <p> <input  onClick={async (e) => {
           await sendPasswordResetEmail(email);
-          toast.success('Sent email');
-        }} type="button" className='text-red-500 text-xl' /></p>
-          </label>
+          alert('Sent email');
+        }} type="submit" className='text-red-500 text-xl' value="Forget Password?" /> </p>
+          <br />
+          <input type="submit" className='btn btn-success mt-3 justify-center w-full' value="SignIn" />
+         
+  <div className="divider w-full">OR</div>
+            <button className="btn btn-outline w-full" onClick={() => signInWithGoogle()}>Sign In With Google</button>
+            <ToastContainer />
+            </form>
         </div>
-        <div class="form-control mt-6">
-          <button class="btn btn-primary">Login</button>
         </div>
-        <div className="divider">OR</div>
-                    <button
-                        onClick={() => signInWithGoogle()}
-                        className="btn btn-outline"
-                    >Continue with Google  <img className='w-10' src={google} alt="" /></button>
-                </div>
-      </div>
-     
-      </form>
         </div>
         </div>
     );

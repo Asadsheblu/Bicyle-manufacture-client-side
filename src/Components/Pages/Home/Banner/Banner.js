@@ -1,19 +1,36 @@
 
 import React from "react";
+import banner1 from "../../../../assets/img/banner1 (2).jpeg"
+import banner2 from "../../../../assets/img/banner1 (3).jpeg"
+import banner3 from "../../../../assets/img/banner1.jpg"
 // Import Swiper React components
 const Banner = () => {
     return (
-        <div className='ms-10 me-10 grid grid-cols-1 lg:grid-cols-2 p-10'>
-            <div>
-            <iframe className='w-3/4 h-80 pt-6'  src="https://www.youtube.com/embed/FGnlxE2Fawg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div className='pt-10'>
-    <h3 className='text-red-500 text-4xl'>WE AIM TO MANUFACTURE FOR YOU THE BEST QUALITY PRODUCTS</h3>
-                    <p className="p-2">Established in 1994,BICYCLES MANIA MANUFACTURE has made a name for itself in the list of top suppliers of bicycle spare parts, complete bicycle, motorcycle parts, fasteners & many more in BD. It is one of the  listed products in BD.They are amongst the reputed Indian organizations, extremely engaged in giving bicycle Parts and accessories of, motorcycles parts, complete bicycles, etc and good quality range of Parts and accessories of bicycles, motorcycles, etc..</p>
+     
+    <div class="carousel w-full">
+  
+  <div id="slide2" class="carousel-item relative w-full">
+    <img src={banner1} class="w-full"/> / 
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide1" class="btn btn-circle">❮</a> 
+      <a href="#slide3" class="btn btn-circle">❯</a>
     </div>
-      
-            
-      </div> 
+  </div> 
+  <div id="slide3" class="carousel-item relative w-full">
+    <img src={banner2} class="w-full"/> / 
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide2" class="btn btn-circle">❮</a> 
+      <a href="#slide4" class="btn btn-circle">❯</a>
+    </div>
+  </div> 
+  <div id="slide4" class="carousel-item relative w-full">
+    <img src={banner3} class="w-full"/> / 
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide3" class="btn btn-circle">❮</a> 
+      <a href="#slide1" class="btn btn-circle">❯</a>
+    </div>
+  </div>
+</div>
      
     );
 };

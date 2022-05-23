@@ -13,9 +13,11 @@ const Part = ({part}) => {
   <div class="card-body">
     <h2 class="card-title">Product Name:{name}</h2>
     <p>Product Description:{description}</p>
+    <h4 class="text-xl">Available quantity:{Quantity}</h4>
+    <h4 class="text-xl">Minimum quantity:{Mquantity}</h4>
     <h4 class="text-xl">Product Price:{price}</h4>
     <div class="card-actions justify-center">
-      <button onClick={()=>handelParts(_id)} class="btn btn-primary">Place Order</button>
+      <button onClick={()=>handelParts(_id)} class="btn btn-primary">Product Details</button>
     </div>
   </div>
 </div>

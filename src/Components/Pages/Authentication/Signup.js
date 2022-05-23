@@ -8,6 +8,7 @@ import Loading from '../../SharedPages/Loading';
 import { Link } from 'react-router-dom';
 import google from "../../../assets/img/google-g-2015-logo-svgrepo-com.svg"
 import { ToastContainer, toast } from 'react-toastify';
+import useToken from '../../../Hook/useToken';
   
 const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -24,7 +25,7 @@ const Signup = () => {
     // const [token]  = useToken(user || gUser);
 
     const navigate = useNavigate();
-
+const [token]=useToken(user || gUser)
     let signInError;
 
     if (loading || gLoading || updating) {
@@ -35,7 +36,7 @@ const Signup = () => {
         signInError = <p className='text-danger'><small>{error?.message || gError?.message || updateError?.message}</small></p>
     }
 
-    if (user||gUser) {
+    if (token) {
         navigate('/');
     }
 
@@ -124,7 +125,7 @@ const Signup = () => {
                         </div>
 
                         {signInError}
-                        <input className='btn bg-primary btn-primary w-full max-w-xs text-white' type="submit" value="Sign Up" />
+                        <input type="submit" className='btn btn-success mt-3 justify-center w-full' value="SignUp" />
                     </form>
                     <p><small>Already have an account? <Link className='text-primary' to="/login">Please login</Link></small></p>
                     <div className="divider">OR</div>

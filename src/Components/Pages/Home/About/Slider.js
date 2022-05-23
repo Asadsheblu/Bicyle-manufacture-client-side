@@ -16,6 +16,7 @@ import banner3 from "../../../../assets/img/b-3.jpg"
 const Slider = () => {
     return (
         <div className="p-10">
+          <h2 className="text-center text-3xl p-10">Gallery</h2>
         <Swiper
    slidesPerView={3}
    spaceBetween={30}

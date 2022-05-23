@@ -12,7 +12,7 @@ const Parts = () => {
         <div>
             <h2 className='text-red-500 text-center text-3xl pt-10'>BICYCLES MANIA FEATURED CATEGORIES</h2>
             <p className='text-center text-black-300'>We Manufactured in All Cycle Parts, Chain-Wheels, saddles, Free Wheels, Hub Parts, Pedals, chains and accessories.</p>
-        <div className='m-10 grid grid-cols-1 lg:grid-cols-3 p-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 p-10'>
             {
                 parts?.map(part=><Part key={part?._id} part={part}></Part>)
             }
