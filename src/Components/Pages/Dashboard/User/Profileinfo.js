@@ -11,23 +11,16 @@ const Profileinfo = () => {
         const email=user?.email
       
         if(user){
-        fetch(`http://localhost:5000/userinfo`,{
-            method:"GET",
-            headers:{
-                authorization:`Bearer ${localStorage.getItem("accessToken")}`
-            }
-        })
+        fetch(`http://localhost:5000/userinfo?email=${email}`)
         .then(res=>res.json())
-        .then(data=>setinfo(data))
+        .then(data=>setinfo(data[0]))
     }
     },[user])
     return (
         <div>
-            {
-                myInfo.map(info=><div>
-                    <h6>{info?._id}</h6>
-                </div>)
-            }
+          <h6>Educational Qualification:<span className='text-xl text-primary'>{myInfo?.info?.education}</span></h6>
+          <h6>Your Country:<span className='text-xl text-primary'>{myInfo?.info?.location}</span></h6>
+          <h6>Your Contact No:<span className='text-xl text-primary'>{myInfo?.info?.number}</span></h6>
         </div>
     );
 };

@@ -4,9 +4,11 @@ import { useParams } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 const Purchase = () => {
     const {id}=useParams()
-    const [parts,setParts]=useState([])
+    const [parts,setParts]=useState({})
+   const [disable, setDisable] = useState(false);
+   const [newQuantity,setNewQuantity]=useState(0)
     const [user]=useAuthState(auth)
-    const [newQuantity,setNewQuantity]=useState(0)
+    
     useState(()=>{
         fetch(`http://localhost:5000/parts/${id}`)
         .then(res=>res.json())
@@ -14,14 +16,66 @@ const Purchase = () => {
 
        
     },[])
+  
+    const handleChange = event => {
+      const disable = event.target.value;
+
+      setDisable(disable);
+  }
+  const handeldelivered=async()=>{
+    const updatedQuantity = +newQuantity - 1;
+   
+    setNewQuantity(updatedQuantity)
+
+    const url = `http://localhost:5000/parts/${id}`;
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({ updatedQuantity })
+    })
+        .then(res => res.json())
+        .then(data => {
+            
+console.log('success', data);
+            alert('Delivered successfully!!!');
+        })
+    
+  }
+     
     const handelAdditional=(e)=>{
       e.preventDefault()
       const address=e.target.address.value 
       const number=e.target.number.value 
-      const email=user?.email
-      const name=user?.displayName
-      const data={address,number,email,name}
+      const orders=e.target.orders.value
+    
+      const data={address,number,orders}
       console.log(data);
+     const orderData={
+      orderId:parts._id,
+      orders,
+      customerName:user?.displayName,
+      
+      customer:user.email,
+      price:parts.price*orders,
+    address,
+    number
+
+     }
+     fetch('http://localhost:5000/order',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(orderData)
+        })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+                    alert(`Your order for ${parts?.name} is placed`)
+                })
+                
     }
     return (
         <div className='m-10 grid grid-cols-1 lg:grid-cols-2 gap-10 p-10'>
@@ -30,47 +84,85 @@ const Purchase = () => {
   <figure><img src={parts?.img} alt="Shoes" /></figure>
   <div class="card-body">
     <h2 class="card-title">Product Name:{parts?.name}</h2>
-    <p>Product Description:{parts?.description}</p>
+    <p>parts? Description:{parts?.description}</p>
     <h4 class="text-xl">Product Price:{parts?.Quantity}</h4>
-    <h4 class="text-xl">Product Price:{parts?.Mquantity}</h4>
+   
+  
+    <h4 class="text-xl"> Minimam Quantity:{parts?.Mquantity}</h4>
     
-    <div class="card-actions justify-center">
-      <button  class="btn btn-primary">Place Order</button>
-    </div>
   </div>
 </div>
            </div> 
-           <div className='p-14 w-75 shadow-2xl mx-auto'>
-            <h1 className='text-center text-2xl'>Additional Info</h1>
-            <form onSubmit={handelAdditional}  className="mx-auto">
-                
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input type="text" value={user?.displayName}  class="input input-bordered w-full max-w-xs" />
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input type="email" value={user?.email}class="input input-bordered w-full max-w-xs" />
-          <label className="label">
-            <span className="label-text">address</span>
-          </label>
-          <input type="text" name='address' placeholder="address here" class="input input-bordered w-full max-w-xs" />
-          <label className="label">
-            <span className="label-text">phone number</span>
-          </label>
-          <input type="text" name='number' placeholder="phone number here" class="input input-bordered w-full max-w-xs" />
-          
-         
+           <div>
+            <div className='mt-5 shadow-lg '>
+                <h3 className='text-center'> parts? Detail of {parts?.name}</h3>
+            </div>
+            <form onSubmit={handelAdditional} className='w-50   text-center'>
+            <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Your Name</span>
+                    </label>
+                <input type="text" class="input input-bordered input-primary w-full max-w-xs " value={user.displayName} disabled />
+                </div>
+                <br />
+            <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Your Email</span>
+                    </label>
+                <input type="text" class="input input-bordered input-primary w-full max-w-xs " value={user.email} disabled />
+                </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Material name</span>
+                    </label>
+                <input type="text"  placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs " value={parts?.name} disabled />
+                </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Price per Material</span>
+                    </label>
+                <input type="text" name='price' placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs " value={parts?.price} disabled />
+                </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Quantities Left</span>
+                    </label>
+                <input type="text" name='quantity' placeholder="Type here" class="input input-bordered input-primary w-full max-w-xs " value={parts?.Quantity} disabled />
+                </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Phone number</span>
+                    </label>
+                <input type="text" name='number' placeholder="Phone number" class="input input-bordered input-primary w-full max-w-xs " />
+            </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Your address</span>
+                    </label>
+                <input type="text" name='address' placeholder="Address" class="input input-bordered input-primary w-full max-w-xs " />
+            </div>
+                <br />
+                <div class="form-control flex items-center">
+                    <label class="label">
+                        <span class="label-text">Your Order</span>
+                    </label>
+                <input type="number" name='orders' onChange={handleChange} placeholder="Mininum 100 order required" class="input input-bordered input-primary w-full max-w-xs " />
+                </div>
+                <br />
 
-          
-          <br />
-          <input type="submit" className='btn btn-success mt-3' value="Add Doctor" />
-          
-            
-          
+                    <input className='btn btn-info my-4 fw-bold shadow' type="submit"
+                        disabled={disable < 100 || disable >= parts?.total_quantity}
+                        value="Purchase" />
+
             </form>
-            </div>        
+
+
+        </div>       
                 </div>
        
     );

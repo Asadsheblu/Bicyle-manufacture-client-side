@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import start from "../../../assets/img/icons8-star-48.png"
 const Review = () => {
     const [reviews,setReviews]=useState([])
     useEffect(()=>{
@@ -15,8 +15,9 @@ const Review = () => {
                 reviews.map(review=><div>
                     <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
-    <h2 class="card-title">{review?.review}</h2>
-    <p>" {review?.feedback} "</p>
+    
+    <p class="text-center text-xl">" {review?.feedback} "</p>
+    <h2 class="card-title">{[...Array(parseInt(review?.review)).keys()].map(icon=><div><img width={24} src={start} alt="" /></div>)}</h2>
    
   </div>
 </div>

@@ -14,7 +14,7 @@ const Parts = () => {
             <p className='text-center text-black-300'>We Manufactured in All Cycle Parts, Chain-Wheels, saddles, Free Wheels, Hub Parts, Pedals, chains and accessories.</p>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 p-10'>
             {
-                parts?.map(part=><Part key={part?._id} part={part}></Part>)
+                parts?.slice(0,6).map(part=><Part key={part?._id} part={part}></Part>)
             }
         </div>
         </div>

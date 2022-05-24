@@ -31,9 +31,9 @@ const AddProduct = () => {
                 const products={
                     name:name,
                     description:description,
-                    price:parseFloat(price),
-                    Quantity:parseFloat(quantiity),
-                    Mquantity:parseFloat (mQuantity),
+                    price:parseInt(price),
+                    Quantity:parseInt(quantiity),
+                    Mquantity:parseInt (mQuantity),
                     img:img
 
                 }

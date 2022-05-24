@@ -8,7 +8,7 @@ const Part = ({part}) => {
     }
     return (
         <div>
-           <div class="card card-compact w-96 bg-base-100 shadow-xl text-black">
+           <div class="card card-compact w-50 bg-base-100 shadow-xl text-black">
   <figure><img src={img} alt="Shoes" /></figure>
   <div class="card-body">
     <h2 class="card-title">Product Name:{name}</h2>

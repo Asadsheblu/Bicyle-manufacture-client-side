@@ -17,10 +17,10 @@ const Myprofile = () => {
       const email=user?.email
       const info={education,location,number,linkdin,email}
       console.log(info);
-      fetch(`http://localhost:5000/info`,{
-        method: 'POST',
+      fetch(`http://localhost:5000/info/${email}`,{
+        method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          'content-type': 'application/json',
           authorization:`Bearer ${localStorage.getItem("accessToken")}`
         },
         body: JSON.stringify({

@@ -13,12 +13,17 @@ import Addreview from './Components/Pages/Dashboard/User/Addreview';
 import Myprofile from './Components/Pages/Dashboard/User/Myprofile';
 import Alluser from './Components/Pages/Dashboard/Admin/Alluser';
 import AddProduct from './Components/Pages/Dashboard/Admin/AddProduct';
+import Blog from './Components/Pages/Blog/Blog';
+import ManageOrder from './Components/Pages/Dashboard/Admin/ManageOrder';
+import ManageProduct from './Components/Pages/Dashboard/Admin/ManageProduct';
+import Payment from './Components/Pages/Dashboard/User/Payment';
 function App() {
   return (
     <div>
       <Header />
       <Routes>
         <Route path="/" element={ <Home />}></Route>
+        <Route path="/blog" element={ <Blog />}></Route>
         <Route path='/parts/:id' element={<RequireAuth>
           <Purchase />
         </RequireAuth>}></Route>
@@ -30,6 +35,9 @@ function App() {
         <Route path='/dashboard/profile' element={<Myprofile />}></Route>
         <Route path='/dashboard/user' element={<Alluser />}></Route>
         <Route path='/dashboard/addProduct' element={<AddProduct />}></Route>
+        <Route path='/dashboard/manage' element={<ManageOrder />}></Route>
+        <Route path='/dashboard/manageProduct' element={<ManageProduct />}></Route>
+        <Route path='/dashboard/payment/:id' element={<Payment />}></Route>
         
         
       </Route>
