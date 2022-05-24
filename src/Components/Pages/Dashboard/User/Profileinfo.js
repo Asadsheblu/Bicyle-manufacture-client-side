@@ -4,18 +4,22 @@ import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 
-const Profileinfo = () => {
-    const [myInfo,setinfo]=useState([])
+const Profileinfo = ({isRealod}) => {
+    const [myInfo,setMyinfo]=useState([])
+   console.log(isRealod)
    const [user]=useAuthState(auth)
     useEffect(()=>{
         const email=user?.email
-      
-        if(user){
+      console.log(email)
+     
         fetch(`http://localhost:5000/userinfo?email=${email}`)
         .then(res=>res.json())
-        .then(data=>setinfo(data[0]))
-    }
-    },[user])
+        .then(data=>{
+           
+            setMyinfo(data)
+        })
+    
+    },[user,isRealod])
     return (
         <div>
           <h6>Educational Qualification:<span className='text-xl text-primary'>{myInfo?.info?.education}</span></h6>

@@ -151,7 +151,7 @@ console.log('success', data);
                     <label class="label">
                         <span class="label-text">Your Order</span>
                     </label>
-                <input type="number" name='orders' onChange={handleChange} placeholder="Mininum 100 order required" class="input input-bordered input-primary w-full max-w-xs " />
+                <input type="number" name='orders' onChange={handleChange} placeholder={`Minimum Order ${parts?.Mquantity}`} class="input input-bordered input-primary w-full max-w-xs " />
                 </div>
                 <br />
 

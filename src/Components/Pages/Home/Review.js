@@ -10,7 +10,7 @@ const Review = () => {
         .then(data=>setReviews(data))
     },[])
     return (
-        <div>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 p-10'>
             {
                 reviews.map(review=><div>
                     <div class="card w-96 bg-primary text-primary-content">

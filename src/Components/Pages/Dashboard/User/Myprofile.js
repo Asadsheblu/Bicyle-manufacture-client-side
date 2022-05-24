@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Profileinfo from './Profileinfo';
 const Myprofile = () => {
     const [user]=useAuthState(auth)
-    
+    const [isRealod,setIsreload]=useState(false)
     
     const addInfo=(e)=>{
       e.preventDefault()
@@ -31,10 +31,11 @@ const Myprofile = () => {
       .then(res=>res.json())
       .then(data=>{
         console.log(data);
-        if(data.insertedId){
-          window.location.reload()
+        setIsreload(true)
+        
+         
           alert(`Hey! ${user.displayName} Your profile Information Added`)
-        }
+        
       })
     }
     
@@ -50,7 +51,7 @@ const Myprofile = () => {
   <div class="card-body items-center text-center">
     <h2 class="card-title">Name:{user?.displayName}</h2>
     <p>Email:{user?.email}</p>
-    <Profileinfo />
+    <Profileinfo isRealod={isRealod}></Profileinfo>
     </div>
     </div>
     <div className="ms-10 shadow-xl p-10">

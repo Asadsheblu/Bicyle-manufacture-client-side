@@ -5,7 +5,8 @@ const Addreview = () => {
   const addReview=(e)=>{
     e.preventDefault()
     const feedback=e.target.review.value 
-    const data={feedback,review}
+    const image=e.target.image.files[0]
+    const data={feedback,review,image}
     console.log(data);
     fetch(`http://localhost:5000/review`,{
       method:"POST",
@@ -33,6 +34,12 @@ const Addreview = () => {
             <span class="label-text">Description</span>
           </label>
           <textarea name="review" className='border' id="" cols="30" rows="5"></textarea>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Upload Image</span>
+          </label>
+        <input type="file" name="image" id="" />
         </div>
         <ReactStars
       count={5}
