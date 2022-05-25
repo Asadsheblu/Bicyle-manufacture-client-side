@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import auth from '../../../../firebase.init';
+import { toast } from 'react-toastify';
 const Purchase = () => {
     const {id}=useParams()
     const [parts,setParts]=useState({})
@@ -39,7 +40,7 @@ const Purchase = () => {
         .then(data => {
             
 console.log('success', data);
-            alert('Delivered successfully!!!');
+toast.success('Delivered successfully!!!');
         })
     
   }
@@ -56,7 +57,7 @@ console.log('success', data);
       orderId:parts._id,
       orders,
       customerName:user?.displayName,
-      
+      productName:parts?.name,
       customer:user.email,
       price:parts.price*orders,
     address,
@@ -73,7 +74,7 @@ console.log('success', data);
                 .then(res=>res.json())
                 .then(data=>{
                     console.log(data);
-                    alert(`Your order for ${parts?.name} is placed`)
+                    toast.success(`Your order for ${parts?.name} is placed`)
                 })
                 
     }
@@ -95,7 +96,7 @@ console.log('success', data);
            </div> 
            <div>
             <div className='mt-5 shadow-lg '>
-                <h3 className='text-center'> parts? Detail of {parts?.name}</h3>
+                <h3 className='text-center'> Product Detail of {parts?.name}</h3>
             </div>
             <form onSubmit={handelAdditional} className='w-50   text-center'>
             <div class="form-control flex items-center">
@@ -156,7 +157,7 @@ console.log('success', data);
                 <br />
 
                     <input className='btn btn-info my-4 fw-bold shadow' type="submit"
-                        disabled={disable < 100 || disable >= parts?.total_quantity}
+                        disabled={disable < parts?.Mquantity || disable >= parts?.Quantity}
                         value="Purchase" />
 
             </form>

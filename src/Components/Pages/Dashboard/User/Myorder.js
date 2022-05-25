@@ -38,6 +38,7 @@ const Myorder = () => {
             <th></th>
             <th>Name</th>
             <th>Email</th>
+            <th>Product Name</th>
             <th>Orders Quantity</th>
             <th>Total Price</th>
             <th>Payment</th>
@@ -51,6 +52,7 @@ const Myorder = () => {
         <th>{index+1}</th>
         <td>{order?.customerName}</td>
         <td>{order?.customer}</td>
+        <td>{order?.productName}</td>
         <td>{order?.orders}</td>
         <td>{order?.price}</td>
         <td>{(order?.price && !order.paid)&& <Link to={`/dashboard/payment/${order?._id}`}><button class="btn btn-xs btn-primary">Pay</button></Link>}

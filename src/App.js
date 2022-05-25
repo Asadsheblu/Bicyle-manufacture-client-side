@@ -17,6 +17,7 @@ import Blog from './Components/Pages/Blog/Blog';
 import ManageOrder from './Components/Pages/Dashboard/Admin/ManageOrder';
 import ManageProduct from './Components/Pages/Dashboard/Admin/ManageProduct';
 import Payment from './Components/Pages/Dashboard/User/Payment';
+import Myprotfolio from './Components/Pages/MyProtfoilo/Myprotfolio';
 function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home />}></Route>
         <Route path="/blog" element={ <Blog />}></Route>
+        <Route path="/protfolio" element={ <Myprotfolio />}></Route>
         <Route path='/parts/:id' element={<RequireAuth>
           <Purchase />
         </RequireAuth>}></Route>

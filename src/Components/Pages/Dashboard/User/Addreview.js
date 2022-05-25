@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import ReactStars from 'react-stars'
+import { ToastContainer, toast } from 'react-toastify';
 const Addreview = () => {
   const [review,setReview]=useState(0)
+  const [isReload,setIsreload]=useState(false)
+ 
   const addReview=(e)=>{
     e.preventDefault()
     const feedback=e.target.review.value 
-    const image=e.target.image.files[0]
-    const data={feedback,review,image}
+    
+    const data={feedback,review}
     console.log(data);
+ 
+  
     fetch(`http://localhost:5000/review`,{
       method:"POST",
       headers:{
@@ -18,10 +23,13 @@ const Addreview = () => {
     .then(res=>res.json())
     .then(data=>{
       if(data.insertedId){
-        window.location.reload()
+        setIsreload(true)
         alert("Your review add")
       }
     })
+  
+ 
+
   }
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -35,12 +43,7 @@ const Addreview = () => {
           </label>
           <textarea name="review" className='border' id="" cols="30" rows="5"></textarea>
         </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Upload Image</span>
-          </label>
-        <input type="file" name="image" id="" />
-        </div>
+        
         <ReactStars
       count={5}
       onChange={setReview}

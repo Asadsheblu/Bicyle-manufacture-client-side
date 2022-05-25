@@ -4,6 +4,7 @@ import auth from '../../../../firebase.init';
 import avatar from "../../../../assets/img/download.png"
 import { toast } from 'react-toastify';
 import Profileinfo from './Profileinfo';
+
 const Myprofile = () => {
     const [user]=useAuthState(auth)
     const [isRealod,setIsreload]=useState(false)
@@ -34,7 +35,7 @@ const Myprofile = () => {
         setIsreload(true)
         
          
-          alert(`Hey! ${user.displayName} Your profile Information Added`)
+          toast.success(`Hey! ${user.displayName} Your profile Information Added`)
         
       })
     }

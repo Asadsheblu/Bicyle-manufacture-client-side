@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import Loading from "../../../SharedPages/Loading"
+import { ToastContainer, toast } from 'react-toastify';
 const AddProduct = () => {
-  const [parts,setParts]=useState()
+
   const [user,loading]=useAuthState(auth)
     const imageKey="8883b33790ee9795a35b86084c95369f"
     const addProduct=(e)=>{
@@ -49,7 +50,7 @@ const AddProduct = () => {
                 .then(data=>{
                     if(data.insertedId){
                         window.location.reload()
-                        alert("products added")
+                        toast.success("products added")
                     }
                     console.log(data);
                 })
