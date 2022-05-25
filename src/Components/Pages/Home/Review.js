@@ -10,12 +10,16 @@ const Review = () => {
         .then(data=>console.log(data))
     },[])
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 p-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-4 gap-10 p-10'>
             {
-                reviews.map(review=><div>
+                reviews?.slice(0,4).map(review=><div>
                     <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
-    
+  <div class="avatar items-center justify-items-center text-center">
+  <div class="w-24 rounded-full items-center text-center m-10 justify-items-center  ring ring-primary ring-offset-base-100 ring-offset-2">
+    <img src={review?.img} />
+  </div>
+  </div>
     <p class="text-center text-xl">" {review?.feedback} "</p>
     <h2 class="card-title">{[...Array(parseInt(review?.review)).keys()].map(icon=><div><img width={24} src={start} alt="" /></div>)}</h2>
    

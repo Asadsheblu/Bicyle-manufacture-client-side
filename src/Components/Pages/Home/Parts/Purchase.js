@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import auth from '../../../../firebase.init';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 const Purchase = () => {
     const {id}=useParams()
     const [parts,setParts]=useState({})
@@ -159,6 +159,7 @@ toast.success('Delivered successfully!!!');
                     <input className='btn btn-info my-4 fw-bold shadow' type="submit"
                         disabled={disable < parts?.Mquantity || disable >= parts?.Quantity}
                         value="Purchase" />
+                        <ToastContainer />
 
             </form>
 

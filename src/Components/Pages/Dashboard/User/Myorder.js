@@ -16,6 +16,7 @@ const Myorder = () => {
         .then(res=>res.json())
         .then(data=>setOrder(data))
     },[])
+    
     const handelDeleted=(id)=>{
             fetch(`http://localhost:5000/order/${id}`,{
                 method:"DELETE"
@@ -55,11 +56,21 @@ const Myorder = () => {
         <td>{order?.productName}</td>
         <td>{order?.orders}</td>
         <td>{order?.price}</td>
-        <td>{(order?.price && !order.paid)&& <Link to={`/dashboard/payment/${order?._id}`}><button class="btn btn-xs btn-primary">Pay</button></Link>}
-        {(order?.price && order.paid)&& <button disabled class="btn btn-xs btn-primary">Paid</button>}
-        </td>
         <td>
-        <label for="my-modal-3" class="btn modal-button">Cancel</label>
+                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-xs btn-success" >Payment</button></Link>}
+                                    {(order.price && order.paid) && <div>
+                                        <span className="text-success" >Processing...</span>
+                                        <p><span className='text-success'> {order.transictionId}</span></p>
+                                    </div>}
+                                </td>
+        <td>
+       {
+        (order.price && !order.paid) ?
+        <button for="my-modal-3"  class="btn modal-button">Cancel</button>
+        :
+        <button for="my-modal-3" disabled class="btn modal-button">Cancel</button>
+
+       }
          </td>
       
     

@@ -8,8 +8,8 @@ const Addreview = () => {
   const addReview=(e)=>{
     e.preventDefault()
     const feedback=e.target.review.value 
-    
-    const data={feedback,review}
+    const img=e.target.img.value
+    const data={feedback,review,img}
     console.log(data);
  
   
@@ -24,7 +24,7 @@ const Addreview = () => {
     .then(data=>{
       if(data.insertedId){
         setIsreload(true)
-        alert("Your review add")
+        toast.success("Your review add")
       }
     })
   
@@ -43,6 +43,12 @@ const Addreview = () => {
           </label>
           <textarea name="review" className='border' id="" cols="30" rows="5"></textarea>
         </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Add Your Image</span>
+          </label>
+          <input type="text" name='img'   class="input input-bordered w-full" />
+        </div>
         
         <ReactStars
       count={5}
@@ -54,8 +60,8 @@ const Addreview = () => {
           <button class="btn btn-primary">Add Review</button>
         </div>
         
-     
-      
+     <ToastContainer />
+
         </div>
         </div>
         </form>

@@ -18,6 +18,7 @@ import ManageOrder from './Components/Pages/Dashboard/Admin/ManageOrder';
 import ManageProduct from './Components/Pages/Dashboard/Admin/ManageProduct';
 import Payment from './Components/Pages/Dashboard/User/Payment';
 import Myprotfolio from './Components/Pages/MyProtfoilo/Myprotfolio';
+import Wellcome from './Components/Pages/Dashboard/Wellcome';
 function App() {
   return (
     <div>
@@ -32,7 +33,8 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth>
         <Dashboard/>
       </RequireAuth>}>
-        <Route index element={<Myorder />}></Route>
+        <Route index element={<Wellcome />}></Route>
+        <Route path='/dashboard/myorder' element={<Myorder />}></Route>
         <Route path='/dashboard/review' element={<Addreview />}></Route>
         <Route path='/dashboard/profile' element={<Myprofile />}></Route>
         <Route path='/dashboard/user' element={<Alluser />}></Route>

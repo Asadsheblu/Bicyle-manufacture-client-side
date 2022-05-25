@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import avatar from "../../../../assets/img/download.png"
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 import Profileinfo from './Profileinfo';
 
 const Myprofile = () => {
@@ -15,8 +15,9 @@ const Myprofile = () => {
       const location=e.target.location.value
       const number=e.target.number.value
       const linkdin=e.target.linkdin.value
+      const image=e.target.image.value
       const email=user?.email
-      const info={education,location,number,linkdin,email}
+      const info={education,location,number,linkdin,email,image}
       console.log(info);
       fetch(`http://localhost:5000/info/${email}`,{
         method: 'PUT',
@@ -35,7 +36,7 @@ const Myprofile = () => {
         setIsreload(true)
         
          
-          toast.success(`Hey! ${user.displayName} Your profile Information Added`)
+          toast.success(`Hey! ${user.displayName} Your profile Information UpDated`)
         
       })
     }
@@ -43,18 +44,13 @@ const Myprofile = () => {
     return (
         <div className='m-10 gap-20 grid grid-cols-1 lg:grid-cols-2 p-10'>
          
-            <div class="card w-96 bg-base-100 shadow-xl">
-            <h1 className='text-2xl text-primary'>WellCome {user?.displayName}!!</h1>
-  <figure class="px-10 pt-10">
-    
-    <img src={avatar}alt="avatar" class="rounded-xl" />
-  </figure>
-  <div class="card-body items-center text-center">
-    <h2 class="card-title">Name:{user?.displayName}</h2>
-    <p>Email:{user?.email}</p>
+            
+            <div classname="m-14 items-center justify-items-center text-center">
+
+           
     <Profileinfo isRealod={isRealod}></Profileinfo>
-    </div>
-    </div>
+ 
+   </div>
     <div className="ms-10 shadow-xl p-10">
     <form onSubmit={addInfo}>
         
@@ -92,13 +88,20 @@ const Myprofile = () => {
           <input type="text" name='linkdin' placeholder="Your Linkdin here" class="input input-bordered w-full max-w-xs" />
           
         </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Link Your Image</span>
+          </label>
+          <input type="text" name='image' placeholder="Your Image  Link" class="input input-bordered w-full max-w-xs" />
+          
+        </div>
         <div class="form-control mt-6">
           <button class="btn btn-primary">Save</button>
         </div>
         
      
       
-        
+        <ToastContainer />
         
         </form>
   </div>
