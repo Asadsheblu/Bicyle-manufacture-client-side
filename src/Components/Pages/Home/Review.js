@@ -14,7 +14,7 @@ const Review = () => {
             <h2 className="text-center text-bold text-2xl text-secondary my-2">Our  Client says</h2>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 my-5'>
             {
-                reviews?.slice(0,4).map(review=><div>
+                reviews?.slice(0,3).map(review=><div>
                     <div class="card w-96 bg-primary text-primary-content">
   <div class="card-body">
   <div class="avatar items-center justify-items-center text-center">

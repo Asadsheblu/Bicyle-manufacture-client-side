@@ -5,7 +5,7 @@ const About = () => {
         <div>
             <h1 className="text-center text-3xl p-10">About us</h1>
                  <div className='ms-10 me-10 grid grid-cols-1 lg:grid-cols-2 p-10'>
-             <div className="w-96">
+             <div class="flex flex-wrap justify-center">
              <img src={ciycle} alt="" />
              </div>
              <div className='pt-10'>

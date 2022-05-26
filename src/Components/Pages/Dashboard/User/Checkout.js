@@ -1,121 +1,129 @@
-import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
-  } from '@stripe/react-stripe-js';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
-const Checkout = ({orders}) => {
-    console.log(orders);
+const Checkout = ({order}) => {
+    const stripe= useStripe();
+    const elements= useElements();
+    const[cardError,setCardError]=useState('');
+    const[success,setSuccess]=useState('');
+    const[processing,setProcessing]=useState(false);
+    const[transactionId,setTransactionId]=useState('');
+    const [clientSecret,setClientSecret]=useState('');
+    const {_id,price,customer,customerName}=order;
 
-    const {customerName,customer,price,_id}=orders
-    const [cardEroor,setCardError]=useState('')
-    const [success,setSuccess]=useState('')
-    const [transicationId,settransicationId]=useState('')
-    const [clientSecret,setClientsecret]=useState('')
-    const [processing,setProcessing]=useState(false)
     useEffect(()=>{
-        const url="https://fathomless-stream-52257.herokuapp.com/create-payment-intent"
-        fetch(url,{
+        fetch('https://aqueous-ravine-04948.herokuapp.com/create-payment-intent',{
             method:"POST",
             headers:{
-                "content-type":"application/json",
-               authorization:`bearer ${localStorage.getItem('accessToken')}`
+                'content-type':'application/json',
+                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
             },
             body:JSON.stringify({price})
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
             if(data?.clientSecret){
-             
-                setClientsecret(data.clientSecret)
+                setClientSecret(data.clientSecret);
             }
         })
     },[price])
-    const stripe=useStripe()
-    const elements=useElements()
-    const handleSubmit = async (event) => {
+
+    const handleSubmit=async(event)=>{
         event.preventDefault();
-
-        if (!stripe || !elements) {
+        if(!stripe || !elements){
             return;
         }
 
-        const card = elements.getElement(CardElement);
-
-        if (card === null) {
+        const card=elements.getElement(CardElement);
+        if(card===null){
             return;
         }
-
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
+        const {error,paymentMethod}= await stripe.createPaymentMethod({
+            type:'card',
             card
         });
 
-        setCardError(error?.message || '')
-        setSuccess('');
-       
-        // confirm card payment
-        const {paymentIntent, error:intentError} = await stripe.confirmCardPayment(
-            clientSecret,
-            {
-              payment_method: {
-                card: card,
-                billing_details: {
-                  name: customerName,
-                  email:customer
+            setCardError(error?.message||'')
+            setSuccess('');
+            setProcessing(true);
+            //payment confirmation
+            const {paymentIntent, error:intentError} = await stripe.confirmCardPayment(
+                clientSecret,
+                {
+                  payment_method: {
+                    card: card,
+                    billing_details: {
+                      name:customerName,
+                      email:customer
+                    },
+                  },
                 },
-              },
-            },
-          );
-        if (intentError) {
-            setCardError(intentError?.message);
-        
-        }
-        else {
-            setCardError('');
-           settransicationId(paymentIntent.id)
-            console.log(paymentIntent);
-            setSuccess('Congrats! Your payment is completed.')
-        }
-        const payment = {
-            payment: _id,
-            transicationId: transicationId.id
-        }
-        fetch(`https://fathomless-stream-52257.herokuapp.com/order/${_id}`, {
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              );
+                if(intentError){
+                    setCardError(intentError.message);
+                   setProcessing(false);
+                    success('');
+                }
+                else{
+                    setCardError('');
+                    console.log(paymentIntent);
+                    setTransactionId(paymentIntent.id)
+                    setSuccess('Congratulations your payment is completed');
+            // save payment in db
+            const payment={
+                order:_id,
+                transactionId:paymentIntent.id
+            }
+
+
+            fetch(`https://aqueous-ravine-04948.herokuapp.com/order/${_id}`,{
+                method:"PATCH",
+                headers:{
+                    'content-type':'application/json',
+                    'authorization':`Bearer ${localStorage.getItem('accessToken')}`
                 },
-                body: JSON.stringify(payment)
-            }).then(res => res.json())
-                .then(data => {
-                    setProcessing(false);
-                    console.log(data);
-                })
-      };
-      
+                body:JSON.stringify({payment})
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                setProcessing(false);
+                console.log(data);
+            })
+                }
+    }
     return (
-        <div>
-             <form onSubmit={handleSubmit}>
-        <CardElement />
-        <button type="submit" disabled={!stripe}>
-          Pay
-        </button>
-      </form>
-      {
-       cardEroor && <p className='text-xl text-red-500'>{cardEroor}</p>
-      }
-      {
-       success && <div className='text-xl text-green-500'>
-        <p>{success}</p>
-        <p className="text-xl text-purple-700">Your TransicationId:{transicationId}</p>
-       </div>
-      }
-        </div>
+       <>
+        <form onSubmit={handleSubmit}>
+            <CardElement
+                options={{
+                    style: {
+                        base: {
+                            fontSize: '16px',
+                            color: '#424770',
+                            '::placeholder': {
+                                color: '#aab7c4',
+                            },
+                        },
+                        invalid: {
+                            color: '#9e2146',
+                        },
+                    },
+                }}
+            />
+            <button className='btn btn-success btn-sm mt-5' type="submit" disabled={!stripe|| !clientSecret}>
+                Pay
+            </button>
+        </form>
+        {
+            cardError && <p className='text-red-500'>{cardError}</p>
+        }
+        {
+            success && <div>
+                <p className='text-green-500'>{success} </p>
+                <p>Your transaction id is <span className='font-bold text-primary'>{transactionId}</span> </p>
+                </div>
+        }
+       </>
     );
 };
 
