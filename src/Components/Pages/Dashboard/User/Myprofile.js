@@ -45,7 +45,7 @@ const Myprofile = () => {
         <div className='gap-10 grid grid-cols-1 lg:grid-cols-2 p-10'>
          
             
-            <div classname="m-14 items-center justify-items-center text-center">
+            <div classname="my-5 items-center justify-items-center text-center">
 
            
     <Profileinfo isRealod={isRealod}></Profileinfo>

@@ -1,7 +1,8 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
-const Checkout = ({order}) => {
+const Checkout = ({orders}) => {
+    console.log(orders)
     const stripe= useStripe();
     const elements= useElements();
     const[cardError,setCardError]=useState('');
@@ -9,9 +10,10 @@ const Checkout = ({order}) => {
     const[processing,setProcessing]=useState(false);
     const[transactionId,setTransactionId]=useState('');
     const [clientSecret,setClientSecret]=useState('');
-    const {_id,price,customer,customerName}=order;
+    const {_id,price,customer,customerName}=orders;
 
     useEffect(()=>{
+    if(price){
         fetch('https://fathomless-stream-52257.herokuapp.com/create-payment-intent',{
             method:"POST",
             headers:{
@@ -26,6 +28,7 @@ const Checkout = ({order}) => {
                 setClientSecret(data.clientSecret);
             }
         })
+    }
     },[price])
 
     const handleSubmit=async(event)=>{
@@ -76,7 +79,7 @@ const Checkout = ({order}) => {
             }
 
 
-            fetch(`https://aqueous-ravine-04948.herokuapp.com/order/${_id}`,{
+            fetch(`https://fathomless-stream-52257.herokuapp.com//order/${_id}`,{
                 method:"PATCH",
                 headers:{
                     'content-type':'application/json',

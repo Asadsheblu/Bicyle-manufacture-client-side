@@ -14,7 +14,10 @@ const Myorder = () => {
             }
         })
         .then(res=>res.json())
-        .then(data=>setOrder(data))
+        .then(data=>{
+          console.log(orders)
+          setOrder(data)
+        })
     },[])
     
     const handelDeleted=(id)=>{
@@ -55,7 +58,7 @@ const Myorder = () => {
         <td>{order?.customer}</td>
         <td>{order?.productName}</td>
         <td>{order?.orders}</td>
-        <td>{order?.price}</td>
+        <td>{console.log()}</td>
         <td>
                                     {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-xs btn-success" >Payment</button></Link>}
                                     {(order.price && order.paid) && <div>

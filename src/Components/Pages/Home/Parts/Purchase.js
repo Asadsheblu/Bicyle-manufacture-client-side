@@ -49,7 +49,7 @@ toast.success('Delivered successfully!!!');
       e.preventDefault()
       const address=e.target.address.value 
       const number=e.target.number.value 
-      const orders=e.target.orders.value
+      const orders=parseInt(e.target.orders.value)
     
       const data={address,number,orders}
       console.log(data);
