@@ -16,7 +16,7 @@ const Checkout = ({orders}) => {
     const [clientSecret,setClientsecret]=useState('')
     const [processing,setProcessing]=useState(false)
     useEffect(()=>{
-        const url="http://localhost:5000/create-payment-intent"
+        const url="https://fathomless-stream-52257.herokuapp.com/create-payment-intent"
         fetch(url,{
             method:"POST",
             headers:{
@@ -84,7 +84,7 @@ const Checkout = ({orders}) => {
             payment: _id,
             transicationId: transicationId.id
         }
-        fetch(`http://localhost:5000/order/${_id}`, {
+        fetch(`https://fathomless-stream-52257.herokuapp.com/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

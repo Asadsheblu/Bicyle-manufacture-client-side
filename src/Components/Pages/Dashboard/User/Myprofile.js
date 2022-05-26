@@ -19,7 +19,7 @@ const Myprofile = () => {
       const email=user?.email
       const info={education,location,number,linkdin,email,image}
       console.log(info);
-      fetch(`http://localhost:5000/info/${email}`,{
+      fetch(`https://fathomless-stream-52257.herokuapp.com/info/${email}`,{
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -42,7 +42,7 @@ const Myprofile = () => {
     }
     
     return (
-        <div className='m-10 gap-20 grid grid-cols-1 lg:grid-cols-2 p-10'>
+        <div className='gap-10 grid grid-cols-1 lg:grid-cols-2 p-10'>
          
             
             <div classname="m-14 items-center justify-items-center text-center">

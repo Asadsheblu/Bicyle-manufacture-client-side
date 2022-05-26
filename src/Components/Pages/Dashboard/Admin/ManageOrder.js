@@ -5,7 +5,7 @@ const ManageOrder = () => {
     const [allOrder,setAllorder]=useState([])
     const [loading,setLoading]=useState(false)
     useEffect(()=>{
-        fetch('http://localhost:5000/manageOrder',{
+        fetch('https://fathomless-stream-52257.herokuapp.com/manageOrder',{
           headers:{
             authorization:`Bearer ${localStorage.getItem("accessToken")}`
           }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 import { toast,ToastContainer } from 'react-toastify';
 const Purchase = () => {
@@ -9,9 +9,9 @@ const Purchase = () => {
    const [disable, setDisable] = useState(false);
    const [newQuantity,setNewQuantity]=useState(0)
     const [user]=useAuthState(auth)
-    
+    const navigate=useNavigate()
     useState(()=>{
-        fetch(`http://localhost:5000/parts/${id}`)
+        fetch(`https://fathomless-stream-52257.herokuapp.com/parts/${id}`)
         .then(res=>res.json())
         .then(data=>setParts(data))
 
@@ -28,7 +28,7 @@ const Purchase = () => {
    
     setNewQuantity(updatedQuantity)
 
-    const url = `http://localhost:5000/parts/${id}`;
+    const url = `https://fathomless-stream-52257.herokuapp.com/parts/${id}`;
     fetch(url, {
         method: 'PUT',
         headers: {
@@ -64,7 +64,7 @@ toast.success('Delivered successfully!!!');
     number
 
      }
-     fetch('http://localhost:5000/order',{
+     fetch('https://fathomless-stream-52257.herokuapp.com/order',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'
@@ -75,6 +75,7 @@ toast.success('Delivered successfully!!!');
                 .then(data=>{
                     console.log(data);
                     toast.success(`Your order for ${parts?.name} is placed`)
+                    
                 })
                 
     }

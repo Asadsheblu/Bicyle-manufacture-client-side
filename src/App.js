@@ -19,6 +19,8 @@ import ManageProduct from './Components/Pages/Dashboard/Admin/ManageProduct';
 import Payment from './Components/Pages/Dashboard/User/Payment';
 import Myprotfolio from './Components/Pages/MyProtfoilo/Myprotfolio';
 import Wellcome from './Components/Pages/Dashboard/Wellcome';
+import Notfound from './Components/SharedPages/Notfound/Notfound';
+import Contact from './Components/Pages/Contact/Contact';
 function App() {
   return (
     <div>
@@ -26,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home />}></Route>
         <Route path="/blog" element={ <Blog />}></Route>
+        <Route path="/contact" element={ <Contact />}></Route>
         <Route path="/protfolio" element={ <Myprotfolio />}></Route>
         <Route path='/parts/:id' element={<RequireAuth>
           <Purchase />
@@ -47,6 +50,7 @@ function App() {
       </Route>
         <Route path='/signUp' element={<Signup />}></Route>
         <Route path='/login' element={<SignIn />}></Route>
+        <Route path='*' element={<Notfound />}></Route>
         
       </Routes>
     <Footer/>

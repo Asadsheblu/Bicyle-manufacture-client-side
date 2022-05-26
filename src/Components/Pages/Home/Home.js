@@ -6,6 +6,7 @@ import Parts from './Parts/Parts';
 import Bsummary from "../Home/Bsummary/Bsummary"
 import About from './About/About';
 import Review from './Review';
+import Summary from './Parts/Summary/Summary';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <About />
             <Slider />
             <Parts />
+            <Summary />
           <Review />
            
         </div>

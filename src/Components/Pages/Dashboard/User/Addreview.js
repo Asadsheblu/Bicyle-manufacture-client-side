@@ -13,7 +13,7 @@ const Addreview = () => {
     console.log(data);
  
   
-    fetch(`http://localhost:5000/review`,{
+    fetch(`https://fathomless-stream-52257.herokuapp.com/review`,{
       method:"POST",
       headers:{
         "content-type":"application/json"

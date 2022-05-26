@@ -13,7 +13,7 @@ const Profileinfo = ({isRealod}) => {
         const email=user?.email
       console.log(email)
      
-        fetch(`http://localhost:5000/userinfo?email=${email}`)
+        fetch(`https://fathomless-stream-52257.herokuapp.com/userinfo?email=${email}`)
         .then(res=>res.json())
         .then(data=>{
            
