@@ -12,7 +12,7 @@ const Checkout = ({order}) => {
     const {_id,price,customer,customerName}=order;
 
     useEffect(()=>{
-        fetch('https://aqueous-ravine-04948.herokuapp.com/create-payment-intent',{
+        fetch('https://fathomless-stream-52257.herokuapp.com//create-payment-intent',{
             method:"POST",
             headers:{
                 'content-type':'application/json',
