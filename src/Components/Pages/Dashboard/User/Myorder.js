@@ -7,7 +7,7 @@ const Myorder = () => {
     const [order]=useAuthState(auth)
     const email=order?.email
     useEffect(()=>{
-        fetch(`https://fathomless-stream-52257.herokuapp.com/order?customer=${email}`,{
+        fetch(`https://bicyle-manufacture-server-side.onrender.com/order?customer=${email}`,{
             method:"GET",
             headers:{
                 authorization:`Bearer ${localStorage.getItem('accessToken')}`
@@ -21,7 +21,7 @@ const Myorder = () => {
     },[])
     
     const handelDeleted=(id)=>{
-            fetch(`https://fathomless-stream-52257.herokuapp.com/order/${id}`,{
+            fetch(`https://bicyle-manufacture-server-side.onrender.com/order/${id}`,{
                 method:"DELETE"
             })
             .then(res=>res.json())

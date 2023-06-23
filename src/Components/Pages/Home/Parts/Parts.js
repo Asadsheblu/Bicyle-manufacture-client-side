@@ -4,7 +4,7 @@ import Part from './Part';
 const Parts = () => {
     const [parts,setParts]=useState([])
     useEffect(()=>{
-        fetch('https://fathomless-stream-52257.herokuapp.com/parts')
+        fetch('https://bicyle-manufacture-server-side.onrender.com/parts')
         .then(res=>res.json())
         .then(data=>setParts(data))
     },[])

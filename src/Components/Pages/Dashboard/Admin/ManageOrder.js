@@ -5,7 +5,7 @@ const ManageOrder = () => {
     const [allOrder,setAllorder]=useState([])
     const [loading,setLoading]=useState(false)
     useEffect(()=>{
-        fetch('https://fathomless-stream-52257.herokuapp.com/manageOrder',{
+        fetch('https://bicyle-manufacture-server-side.onrender.com/manageOrder',{
           headers:{
             authorization:`Bearer ${localStorage.getItem("accessToken")}`
           }

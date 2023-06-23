@@ -19,7 +19,7 @@ const Myprofile = () => {
       const email=user?.email
       const info={education,location,number,linkdin,email,image}
       console.log(info);
-      fetch(`https://fathomless-stream-52257.herokuapp.com/info/${email}`,{
+      fetch(`https://bicyle-manufacture-server-side.onrender.com/info/${email}`,{
         method: 'PUT',
         headers: {
           'content-type': 'application/json',

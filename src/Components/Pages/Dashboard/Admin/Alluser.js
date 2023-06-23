@@ -12,7 +12,7 @@ const Alluser= () => {
     const {user}=useAuthState(auth)
     const email=user?.email
     useEffect(()=>{
-      fetch(`https://fathomless-stream-52257.herokuapp.com/user/`,{
+      fetch(`https://bicyle-manufacture-server-side.onrender.com/user/`,{
           method:"GET",
           headers:{
             authorization:`bearer ${localStorage.getItem("accessToken")}`

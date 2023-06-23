@@ -5,7 +5,7 @@ const Userrow = ({user,index}) => {
     console.log(user);
     const {email,role}=user
     const makeAdmin=()=>{
-        fetch(`https://fathomless-stream-52257.herokuapp.com/user/admin/${email}`,{
+        fetch(`https://bicyle-manufacture-server-side.onrender.com/user/admin/${email}`,{
             method:"PUT",
             headers:{
                 authorization:`bearer ${localStorage.getItem("accessToken")}`

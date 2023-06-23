@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 const ManageProduct = () => {
     const [products,setProducts]=useState([])
     useEffect(()=>{
-        fetch('https://fathomless-stream-52257.herokuapp.com/parts')
+        fetch('https://bicyle-manufacture-server-side.onrender.com/parts')
         .then(res=>res.json())
         .then(data=>setProducts(data))
     },[])
     const handelDeleted=(id)=>{
-        fetch(`https://fathomless-stream-52257.herokuapp.com/parts/${id}`,{
+        fetch(`https://bicyle-manufacture-server-side.onrender.com/parts/${id}`,{
             method:"DELETE",
             headers:{
               authorization:`Bearer ${localStorage.getItem('accessToken')}`

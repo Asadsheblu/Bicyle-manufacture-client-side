@@ -11,7 +11,7 @@ const Purchase = () => {
     const [user]=useAuthState(auth)
     const navigate=useNavigate()
     useState(()=>{
-        fetch(`https://fathomless-stream-52257.herokuapp.com/parts/${id}`)
+        fetch(`https://bicyle-manufacture-server-side.onrender.com/parts/${id}`)
         .then(res=>res.json())
         .then(data=>setParts(data))
 
@@ -28,7 +28,7 @@ const Purchase = () => {
    
     setNewQuantity(updatedQuantity)
 
-    const url = `https://fathomless-stream-52257.herokuapp.com/parts/${id}`;
+    const url = `https://bicyle-manufacture-server-side.onrender.com/parts/${id}`;
     fetch(url, {
         method: 'PUT',
         headers: {
@@ -64,7 +64,7 @@ toast.success('Delivered successfully!!!');
     number
 
      }
-     fetch('https://fathomless-stream-52257.herokuapp.com/order',{
+     fetch('https://bicyle-manufacture-server-side.onrender.com/order',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'

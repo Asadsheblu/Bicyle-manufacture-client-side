@@ -14,7 +14,7 @@ const Checkout = ({orders}) => {
 
     useEffect(()=>{
     if(price){
-        fetch('https://fathomless-stream-52257.herokuapp.com/create-payment-intent',{
+        fetch('https://bicyle-manufacture-server-side.onrender.com/create-payment-intent',{
             method:"POST",
             headers:{
                 'content-type':'application/json',
@@ -79,7 +79,7 @@ const Checkout = ({orders}) => {
             }
 
 
-            fetch(`https://fathomless-stream-52257.herokuapp.com//order/${_id}`,{
+            fetch(`https://bicyle-manufacture-server-side.onrender.com//order/${_id}`,{
                 method:"PATCH",
                 headers:{
                     'content-type':'application/json',

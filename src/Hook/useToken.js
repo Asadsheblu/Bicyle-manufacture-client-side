@@ -7,7 +7,7 @@ const useToken=(user)=>{
         console.log(email);
         const currentUser={email:email}
         if(email){
-            fetch(`https://fathomless-stream-52257.herokuapp.com/user/${email}`,{
+            fetch(`https://bicyle-manufacture-server-side.onrender.com/user/${email}`,{
                 method:"PUT",
                     headers:{
                         "content-type":"application/json"

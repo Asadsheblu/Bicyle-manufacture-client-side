@@ -13,7 +13,7 @@ const Addreview = () => {
     console.log(data);
  
   
-    fetch(`https://fathomless-stream-52257.herokuapp.com/review`,{
+    fetch(`https://bicyle-manufacture-server-side.onrender.com/review`,{
       method:"POST",
       headers:{
         "content-type":"application/json"

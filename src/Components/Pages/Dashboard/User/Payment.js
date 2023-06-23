@@ -10,7 +10,7 @@ const stripePromise = loadStripe('pk_test_51L1X09Axl651FBGiX3GTztTGcIxhHgaG82QPn
 const Payment = () => {
     const {id}=useParams()
 
-    const url = `https://fathomless-stream-52257.herokuapp.com/order/${id}`;
+    const url = `https://bicyle-manufacture-server-side.onrender.com/order/${id}`;
     const { data: order, isLoading } = useQuery(['order', id], () => fetch(url, {
       method: 'GET',
       headers: {

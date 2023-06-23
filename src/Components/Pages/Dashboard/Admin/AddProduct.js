@@ -38,7 +38,7 @@ const AddProduct = () => {
                     img:img
 
                 }
-                fetch('https://fathomless-stream-52257.herokuapp.com/parts',{
+                fetch('https://bicyle-manufacture-server-side.onrender.com/parts',{
                     method:"POST",
                     headers:{
                         "content-type":"application/json",

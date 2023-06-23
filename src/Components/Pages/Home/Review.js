@@ -3,7 +3,7 @@ import start from "../../../assets/img/icons8-star-48.png"
 const Review = () => {
     const [reviews,setReviews]=useState([])
     useEffect(()=>{
-        fetch("https://fathomless-stream-52257.herokuapp.com/review",{
+        fetch("https://bicyle-manufacture-server-side.onrender.com/review",{
             method:"GET"
         })
         .then(res=>res.json())
